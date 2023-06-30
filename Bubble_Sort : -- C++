@@ -1,0 +1,41 @@
+//  Bubble sort : -- It is a sorting algorithm that compares two adjacent elements and swaps them until they are in the intended order.
+// Traverse from left and compare adjacent elements and the higher one is placed at right side. 
+// In this way, the largest element is moved to the rightmost end at first. 
+// This process is then continued to find the second largest and place it and so on until the data is sorted.
+
+//  Time Complexity : 1. Worst Case : -- O(n^2)
+//                    2. Average Case : --  O(n^2)
+//                    3. Best Case : --  O(n)
+//  Space Complexity : -- O(1)
+
+//  Ex : -- Input − unsorted data: 1,6,4,2,7
+//          Output − Array after Sorting: 1,2,4,6,7
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int i,j,temp;
+	
+	int n=5;
+	int a[5]={1,6,4,2,7};
+	
+	for(i=0;i<n;i++)
+	{
+		for(j=i+1;j<n;j++)
+		{
+			if(a[j] < a[i])
+			{
+				temp=a[i];
+				a[i]=a[j];
+				a[j]=temp;
+			}
+		}
+	}
+	
+	for(i=0;i<n;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+}
