@@ -1,0 +1,34 @@
+// Divide and Conquer Applications
+// Tower of Hanoi: -- It is a mathematical puzzle which consists three rods(towers). Move the ring from the rodes and count of steps.
+// If n number of disk in the puzzle then count the steps by using formula: -- 2^n - 1
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void towerOfHanoi(int n, char src, char des, char aux)
+{
+	if(n==1)
+	{
+		cout << "Move disk 1 from rod " <<src<<" to rod "<<des<< endl;
+        return;
+	}
+	
+	towerOfHanoi(n-1, src, aux, des);
+	
+    cout << "Move disk "<<n<<" from rod "<<src<<" to rod "<<des<< endl;
+    towerOfHanoi(n-1, aux, des, src);
+}
+
+int main()
+{
+	int n;
+	cout<<"Enter the number of disks: ";
+	cin>>n;
+	
+	towerOfHanoi(n, 'A', 'B', 'C');
+	// A - Source node - src
+	// B - Destination node - des
+	// C - Auxiliary node - aux
+	
+	return 0;
+}
