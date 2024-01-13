@@ -1,0 +1,90 @@
+// Divide and Conquer Applications
+// Merge Sort Program
+
+#include<bits/stdc++.h>
+using namespace std;
+
+void mergeOperation(int arr[], int s, int mid, int e)
+{
+	int n1, n2; // size of sub arrays
+	
+	n1= mid-s+1;
+	n2= e-mid;
+	
+	int arr1[n1], arr2[n2];
+	
+	for(int i=0;i<n1;i++)
+	{
+		arr1[i] = arr[s+i];
+	}
+	
+	for(int i=0;i<n2;i++)
+	{
+		arr2[i] = arr[mid+1+i];
+	}
+	
+	int i=0,j=0,k=s;
+	
+	while(i<n1 && j<n2)
+	{
+		if(arr1[i]<=arr2[j])
+		{
+			arr[k]=arr1[i];
+			i++;
+		}
+		else
+		{
+			arr[k]=arr2[j];
+			j++;
+		}
+		k++;
+	}
+	
+	while(i<n1)
+	{
+		arr[k]=arr1[i];
+		i++;
+		k++;
+	}
+	
+	while(j<n2)
+	{
+		arr[k]=arr2[j];
+		j++;
+		k++;
+	}
+}
+
+void mergeSort(int arr[], int s, int e)
+{
+	if(s<e)
+	{
+		int mid= s+ (e-s)/2;
+		
+		mergeSort(arr, s, mid);
+		mergeSort(arr, mid+1, e);
+		
+		mergeOperation(arr, s, mid, e);
+	}
+}
+
+// Display the sorted array by using merge sort
+int display(int arr[], int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		cout<<arr[i]<<" ";
+	}
+}
+
+int main()
+{
+	int arr[]= {12,5,3,7,25,65,10,44};
+	int n= sizeof(arr)/ sizeof(arr[0]);
+	
+	mergeSort(arr, 0, n-1);
+	
+	display(arr, n); 
+	
+	return 0;
+}
