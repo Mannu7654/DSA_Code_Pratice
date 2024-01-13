@@ -1,0 +1,61 @@
+// Divide and Conquer Applications
+// Karatsuba Algorithm: -- It is used by the system to perform fast multiplication on two n-digit numbers,
+// i.e. the system compiler takes lesser time to compute the product than the time-taken by a normal multiplication.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int findSize(long num)
+{
+	int count=0;
+	while(num > 0)
+	{
+		count++;
+		num /= 10;
+	}
+	
+	return count;
+}
+
+int karatsubaAlgo(long x, long y)
+{
+	if(x<10 && y<10)
+	{
+		return x*y;
+	}
+	
+	int n= fmax(findSize(x), findSize(y)); // n= size of the two numbers
+	if(n < 10)
+	{
+		return x*y;
+	}
+	
+	n= (n/2) + (n%2);
+	long multi=pow(10, n);
+	
+	long b= x / multi;
+	long a= x - (b*multi);
+	
+	long d= y / multi;
+	long c= y - (d*n);
+	
+	long u= karatsubaAlgo(a, c);
+	long z= karatsubaAlgo(a+b, c+d);
+	long v= karatsubaAlgo(b, d);
+	
+	return u + ((z-u-v) * multi) + (v * (long)(pow(10, 2*n)));
+}
+
+int main()
+{
+	long x,y;
+	
+	cout<<"First Number: -- ";
+	cin>>x;
+	cout<<"\nSecond Number: -- ";
+	cin>>y;
+	
+	cout<<"\nThe product of "<<x<<" and "<<y<<" = "<<karatsubaAlgo(x,y)<<endl;
+	
+	return 0;
+}
